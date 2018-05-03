@@ -1,4 +1,4 @@
-FROM tortuga-builder
+FROM cameronbrunner/tortuga-builder
 
 RUN curl -L -O https://github.com/cameronbrunner/tortuga/releases/download/buildkit-devel/tortuga-6.3.0.tar.bz2 && \
       tar xjvf tortuga-6.3.0.tar.bz2 && \
