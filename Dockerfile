@@ -1,9 +1,18 @@
 FROM centos:7
 
+# Python 3.6 and other build tools
 RUN rpm -ivh http://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm && \
-        yum install -y centos-release-scl puppet-agent && \
-        yum install -y rh-python36 git rsync bzip2 && \
-        rm -rf /var/cache/yum
+                yum install -y centos-release-scl puppet-agent && \
+                yum install -y rh-python36 git rsync bzip2 && \
+                rm -rf /var/cache/yum && \
+                . /opt/rh/rh-python36/enable && \
+                pip install tox
+                
+# Make sure the environment is set up right
 ADD scripts/entrypoint.sh /
-ADD scripts/build-tortuga.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
+
+# Support running builds like so:
+# docker run -it --rm -v `pwd`:/tortuga univa/tortuga-builder
+WORKDIR /tortuga
+CMD [ "bash", "-c", "pip install -r requirements.txt && paver build" ]
