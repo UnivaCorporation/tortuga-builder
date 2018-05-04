@@ -7,6 +7,10 @@ RUN rpm -ivh http://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm &
                 rm -rf /var/cache/yum && \
                 . /opt/rh/rh-python36/enable && \
                 pip install tox
+
+# Fix buggy pip
+RUN . /opt/rh/rh-python36/enable && \
+      pip install --upgrade "git+https://github.com/EmmEff/pip2pi.git@pip-10-fix#egg=pip2pi-0.7.0"
                 
 # Make sure the environment is set up right
 ADD scripts/entrypoint.sh /
