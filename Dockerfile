@@ -19,4 +19,4 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 # Support running builds like so:
 # docker run -it --rm -v `pwd`:/tortuga univa/tortuga-builder
 WORKDIR /tortuga
-CMD [ "bash", "-c", "pip install -r requirements.txt && paver build" ]
+CMD [ "bash", "-c", "pip install -r requirements.txt && paver clean && paver build" ]
