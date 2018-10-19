@@ -3,7 +3,7 @@ FROM centos:7
 # Python 3.6 and other build tools
 RUN rpm -ivh http://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm && \
                 yum install -y centos-release-scl puppet-agent && \
-                yum install -y rh-python36 git rsync bzip2 && \
+                yum install -y rh-python36 git rsync bzip2 unzip && \
                 rm -rf /var/cache/yum && \
                 . /opt/rh/rh-python36/enable && \
                 pip install tox
