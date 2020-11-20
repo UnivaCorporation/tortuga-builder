@@ -1,24 +1,21 @@
 FROM centos:7
 
 # Add repos for Puppet and Puppet Development Kit
-RUN rpm -ivh https://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm
-RUN rpm -ivh https://yum.puppetlabs.com/puppet-tools-release-el-7.noarch.rpm
-
 # Install Centos software collections repo
-RUN yum install -y centos-release-scl
-
 # Install Python 3.6 and other build tools
-RUN yum update -y && yum install -y \
-    bzip2 \
-    git \
-    rh-python36 \
-    rsync \
-    unzip \
-    pdk \
-    puppet-agent
-
-# Clean yum cache
-RUN rm -rf /var/cache/yum
+RUN rpm -ivh https://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm \
+    && rpm -ivh https://yum.puppetlabs.com/puppet-tools-release-el-7.noarch.rpm \
+    && yum install -y centos-release-scl \
+    && yum update -y \
+    && yum install -y \
+        bzip2 \
+        git \
+        rh-python36 \
+        rsync \
+        unzip \
+        pdk \
+        puppet-agent \
+    && yum clean all
 
 # Make sure the environment is set up right
 ADD scripts/entrypoint.sh /
