@@ -15,6 +15,8 @@ RUN rpm -ivh https://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm \
         unzip \
         pdk \
         puppet-agent \
+    && . /opt/rh/rh-python36/enable \
+    && pip install tox \
     && yum clean all
 
 # Make sure the environment is set up right
